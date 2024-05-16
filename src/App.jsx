@@ -1,11 +1,24 @@
 import { useState } from "react";
+import citacoes from "./data";
+import Citacao from "./components/Citacao";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [indice, setIndice] = useState(0);
+  const proximaCitacao = () => {
+    setIndice((indiceAtual) => (indiceAtual + 1) % citacoes.length);
+  };
 
   return (
     <>
-      <h4>TESTE BOOTSTRAP</h4>
+      <div className="container">
+        <Citacao
+          texto={citacoes[indice].texto}
+          autor={citacoes[indice].autor}
+        />
+        <button className="btn btn-success mt-2" onClick={proximaCitacao}>
+          Próxima citação
+        </button>
+      </div>
     </>
   );
 }
